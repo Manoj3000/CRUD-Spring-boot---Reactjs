@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './components/List';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddForm from './components/AddForm';
+import Navbar from './components/Navbar';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <ToastContainer
+          toastClassName="dark-toast"
+          position={toast.POSITION.BOTTOM_RIGHT}
+          autoClose={2000} />
+        <div className="container my-5">
+          <Routes>
+            <Route path="/" element={<List />} />
+            <Route path="/add" element={<AddForm title="Add" />} />
+            <Route path="/edit/:id" element={<AddForm title="Edit" />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
